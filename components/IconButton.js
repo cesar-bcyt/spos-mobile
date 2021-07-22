@@ -10,14 +10,19 @@ function IconButton(props) {
     <TouchableOpacity>
       <Card style={style}>
         <View style={{ padding: 10, flexDirection: 'column', alignItems: 'center' }}>
-          <Ionicons name={icon} size={30} color={props.theme.palette.primaryColor} />
+          { typeof icon === 'string' ? (
+                <Ionicons name={icon} size={30} color={props.theme.palette.primaryColor} />
+              ) : (
+                icon
+              )
+          }
           <Text style={{ fontWeight: 'bold' }}>{ title }</Text>
-          {
-          // text.map((text, index) => (
-          //   <View key={index} style={{ width: '100%', alignItems: 'center', justifyContent: 'center' }}>
-          //     <Text style={{ fontSize: 13, color: props.theme.palette.secondaryTextColor, width: '100%' }}>{ text }</Text>
-          //   </View>
-          // )
+          { 
+            text && text.map((line, index) => (
+              <View key={index} style={{ width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{ fontSize: 13, color: props.theme.palette.secondaryTextColor, width: '100%' }}>{ line }</Text>
+              </View>
+            ))
           }
         </View>
       </Card>

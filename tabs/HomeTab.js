@@ -24,13 +24,13 @@ export default function HomeTab(props) {
         <WarningSnackbar text={"4 productos bajo stock mínimo"} visible={warningIsVisble} onPress={ () => setWarningIsVisible(false) }/>
         <View style={{ flexDirection: 'column' }}>
           <View style={{ flexDirection: 'row', justifyContent: 'space-evenly' }}>
-            <IconButton icon="bar-chart" title="Tendencias" text={["Agregación", "y predicciones"]} style={{ flex: 1 }}/>
-            <IconButton icon="cash-outline" title="Impuestos" text={["Detalles impuestos", "mensuales"]} style={{ width: '50%' }}/>
-            <IconButton icon="receipt" title="Últimos DTE" text={["Ver últimos DTE"]} style={{ flex: 1 }}/>
+            <IconButton icon="bar-chart" title="Tendencias" style={{ flex: 1 }}/>
+            <IconButton icon="cash-outline" title="Impuestos" style={{ width: '50%' }}/>
+            <IconButton icon="receipt" title="Últimos DTE" style={{ flex: 1 }}/>
           </View>
         </View>
         <Card>
-          <View style={{ padding: 10, }}>
+          <View style={{ padding: 10 }}>
             <Text style={{ fontWeight: 'bold', fontSize: 20 }}>Últimas ventas</Text>
             { Object.keys(sales).map(key => (
               <DataRow money left={"Total " + key} right={sales[key]} />
