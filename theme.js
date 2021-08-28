@@ -19,6 +19,7 @@ export const theme = {
   button: {
     text: {
       color: 'white'
-    }
+    },
+    zIndex: -1
   }
 }

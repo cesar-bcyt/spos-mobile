@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { Button, Card, Toolbar } from 'react-native-material-ui';
 import DataRow from '../components/DataRow';
 import WarningSnackbar from '../components/WarningSnackbar';
 import IconButton from '../components/IconButton';
+import { useStore } from 'react-redux';
 import { sales, productsStock } from '../exampleData.js';
 
 export default function HomeTab(props) {
   const [warningIsVisble, setWarningIsVisible] = useState(true);
+  const [token, setToken] = useState("abc123");
   const { setActive } = props;
+  const store = useStore();
+
+  useEffect(() => {
+    if (store.getState()) {
+      const { token } = store.getState();
+    }
+    setToken(token)
+  }, [token])
+
   return (
     <View>
       <Toolbar
@@ -70,6 +81,9 @@ export default function HomeTab(props) {
             <Button raised primary text="Ver detalles" />
           </View>
         </Card>
+    {
+        // <Text>TOKEN: { token }</Text>
+    }
       </View>
     </View>
   );
