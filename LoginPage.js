@@ -3,12 +3,13 @@ import { Toolbar } from 'react-native-material-ui';
 import { withTheme } from 'react-native-material-ui';
 import { TextInput, Picker, StatusBar, Button, View, SafeAreaView, Text, TouchableOpacity } from 'react-native';
 import { findServersOnLocalNetwork, findUsersOnServer, login } from './utils';
+import store from './redux/store';
 
 function LoginPage(props) {
   const { theme } = props;
   const [username, setUsername] = useState(null);
   const [password, setPassword] = useState("");
-  const [selectedServer, setSelectedServer] = useState(null);
+  const [selectedServer, _setSelectedServer] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
   const [lookingForServers, setLookingForServers] = useState(true);
   const [waitingForLogin, setWaitingForLogin] = useState(false);
@@ -16,6 +17,11 @@ function LoginPage(props) {
   const [servers, setServers] = useState([
     {label: '(Buscando)...', value: 'buscando'},
   ]);
+
+  function setSelectedServer(server) {
+    store.dispatch({ type: 'set_server_address', payload: server.value });
+    _setSelectedServer(server);
+  }
 
   async function findServers() {
     setServers([{label: '(Buscando)...', value: 'buscando'}])

@@ -1,6 +1,8 @@
 const initialState = {
   token: null,
-  signedIn: false
+  signedIn: false,
+  serverAddress: null,
+  activeTab: 'home',
 }
 
 export default function rootReducer(state = initialState, action) {
@@ -10,6 +12,12 @@ export default function rootReducer(state = initialState, action) {
       break;
     case 'set_signed_in':
       return {...state, signedIn: action.payload}
+      break;
+    case 'set_server_address':
+      return {...state, serverAddress: action.payload}
+      break;
+    case 'set_active_tab':
+      return {...state, activeTab: action.payload}
       break;
     default:
       return state;

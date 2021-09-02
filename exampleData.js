@@ -4,6 +4,7 @@ export const sales = {
   mes: 3049,
   total: 10029,
 }
+
 export const productsStock = [
   {name: "Cebollas", minimum: 20, qty: 18},
   {name: "Pan", minimum: 10, qty: 9},

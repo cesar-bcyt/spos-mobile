@@ -16,9 +16,3 @@ export default function App() {
     </Provider>
   );
 }
-
-function mapStateToProps(state, ownProps) {
-  return {
-    signedIn: state.signedIn
-  };
-}

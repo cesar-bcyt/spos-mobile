@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { BottomNavigation } from 'react-native-material-ui';
@@ -8,10 +8,23 @@ import SettingsTab from './tabs/SettingsTab';
 import StockTab from './tabs/StockTab';
 import POSTab from './tabs/POSTab';
 import Ionicons from '@expo/vector-icons/Ionicons';
+import { connect } from 'react-redux';
+import store from './redux/store';
 
 function TabWrapper(props) {
-  const [active, setActive] = useState('home');
+  const [active, _setActive] = useState(props.active);
   const { theme } = props;
+
+  function refreshTab() {
+    _setActive(store.getState().activeTab);
+  }
+
+  store.subscribe(refreshTab);
+
+  function setActive(tab) {
+    _setActive(tab);
+    store.dispatch({ type: 'set_active_tab', payload: tab });
+  }
 
   const bottomTabs = {
     home: {
@@ -61,4 +74,10 @@ function TabWrapper(props) {
   );
 }
 
-export default withTheme(TabWrapper);
+function mapStateToProps(state, ownProps) {
+  return {
+    active: state.activeTab
+  };
+}
+
+export default connect(mapStateToProps)(withTheme(TabWrapper));
